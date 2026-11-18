@@ -1,0 +1,62 @@
+{
+  "name": "uzat",
+  "productName": "Uzat",
+  "version": "1.0.0",
+  "description": "Bir bosishda ekran ulashish va masofadan boshqarish (lokal tarmoq)",
+  "author": "Uzat",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "e2e": "node test/e2e.js",
+    "e2e-web": "node test/e2e-web.js",
+    "icon": "electron build/make-icon.js",
+    "build:native": "node build/build-native.js",
+    "dist": "npm run build:native && electron-builder --win --x64"
+  },
+  "devDependencies": {
+    "electron": "^45.3.3",
+    "electron-builder": "^26.18.0"
+  },
+  "build": {
+    "appId": "uz.uzat.app",
+    "productName": "Uzat",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "package.json",
+      "core/**",
+      "src/**",
+      "web/**",
+      "native/input.cs",
+      "native/uzat-input.exe"
+    ],
+    "asarUnpack": [
+      "native/**"
+    ],
+    "win": {
+      "icon": "build/icon.png",
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Uzat",
+      "include": "build/installer.nsh",
+      "artifactName": "Uzat-Setup-${version}.exe"
+    },
+    "portable": {
+      "artifactName": "Uzat-${version}-portable.exe"
+    }
+  }
+}

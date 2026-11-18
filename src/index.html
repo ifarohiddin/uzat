@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; media-src 'self' blob: mediastream:" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Uzat</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="titlebar"><span class="brand"><i class="dot"></i>Uzat</span></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <main class="card" id="card">
+    <section class="stage" id="stage">
+      <div class="stage-frame" aria-hidden="true">
+        <i class="gl v1"></i><i class="gl v2"></i><i class="gl h1"></i><i class="gl h2"></i>
+      </div>
+
+      <div class="folder" id="folder">
+        <svg class="folder-shape" viewBox="0 0 396 312" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="fg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#2b2e35" />
+              <stop offset="1" stop-color="#25282e" />
+            </linearGradient>
+          </defs>
+          <path d="M22 0H150c10 0 16 4 22 12l14 18c5 7 11 10 20 10H374c12 0 22 10 22 22V290c0 12-10 22-22 22H22C10 312 0 302 0 290V22C0 10 10 0 22 0Z"
+                fill="url(#fg)" stroke="rgba(255,255,255,.07)" stroke-width="1.5" vector-effect="non-scaling-stroke" />
+        </svg>
+
+        <div class="tiles">
+          <button class="tile big" id="screenTile" type="button" title="Ekranni tanlash">
+            <img class="shot" id="thumb" alt="" hidden />
+            <video class="shot" id="preview" muted playsinline hidden></video>
+            <div class="wave" id="wave" aria-hidden="true"></div>
+            <div class="live-badge" id="liveBadge" hidden><i></i>JONLI</div>
+            <div class="drop-text" id="srcText">Ekran tanlanmoqda…</div>
+          </button>
+          <button class="tile small" id="pickBtn" type="button" title="Ekran, sifat va ovoz">
+            <svg viewBox="0 0 24 24" width="21" height="21"><rect x="3" y="4" width="18" height="12" rx="2" /><path d="M8 20h8M12 16v4" /></svg>
+          </button>
+          <button class="tile small share" id="shareTile" type="button" title="Ulashishni boshlash" disabled>
+            <svg class="i-share" viewBox="0 0 24 24" width="22" height="22"><path d="M14 5l6 6-6 6M20 11h-9a6 6 0 0 0-6 6v1" /></svg>
+            <svg class="i-stop" viewBox="0 0 24 24" width="18" height="18"><rect x="6" y="6" width="12" height="12" rx="2.5" /></svg>
+          </button>
+        </div>
+
+        <div class="pointer" id="pointer" hidden>
+          <svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true">
+            <path d="M4 3l15 8-6.5 1.8L9.8 19z" />
+          </svg>
+          <span class="tag" id="pointerTag">—</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <h1>Bir bosishda ekran ulashish</h1>
+      <p class="sub" id="sub">Ekraningizni telefon, televizor yoki kompyuterga jonli, qotmasdan uzating.</p>
+      <div class="web-info" id="webInfo" hidden>
+        <div class="wi-label">Qurilmada brauzerni oching:</div>
+        <div class="wi-row">
+          <span class="wi-url" id="webUrl">—</span>
+          <span class="wi-pin">PIN <b id="webPin">----</b></span>
+        </div>
+        <div class="wi-alt" id="webAlt"></div>
+      </div>
+
+      <div class="peers" id="peers" role="listbox" aria-label="Qurilmalar"></div>
+
+      <div class="actions">
+        <button class="pill" id="shareBtn" type="button" disabled>Ulashish</button>
+        <div class="stats" id="stats" hidden>
+          <span class="stat-main" id="statMain">Ulanmoqda…</span>
+          <span class="stat-sub" id="statSub"></span>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <button type="button" class="me" id="meBtn" title="Nomni o'zgartirish">Siz: <b id="meName">…</b></button>
+      <input class="me-input" id="meInput" maxlength="40" hidden />
+      <button type="button" class="ctl" id="ctlBtn" title="Ko'ruvchi qurilma ekranga tegib kompyuterni boshqara oladimi">
+        <svg viewBox="0 0 24 24" width="14" height="14"><path d="M5 3l14 7-6 2-3 6z" /></svg>
+        <span id="ctlText">Boshqaruv o'chiq</span>
+      </button>
+    </footer>
+
+    <!-- Ekran / sifat tanlash -->
+    <div class="sheet-wrap" id="pickWrap" hidden>
+      <div class="sheet pick" role="dialog" aria-modal="true" aria-labelledby="pickTitle">
+        <h2 id="pickTitle">Nimani ulashamiz?</h2>
+        <p class="pick-note" id="qNote"></p>
+        <div class="src-grid" id="srcGrid"></div>
+        <div class="row-label">Sifat</div>
+        <div class="seg" id="qualitySeg" role="radiogroup"></div>
+        <label class="trust"><input type="checkbox" id="audioBox" /> <span>Kompyuter ovozini ham uzatish</span></label>
+        <div class="sheet-actions">
+          <button class="pill primary" id="pickDone" type="button">Tayyor</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kiruvchi so'rov -->
+    <div class="sheet-wrap" id="askWrap" hidden>
+      <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="askTitle">
+        <div class="sheet-icon"><svg viewBox="0 0 24 24" width="22" height="22"><rect x="3" y="4" width="18" height="12" rx="2" /><path d="M8 20h8M12 16v4" /></svg></div>
+        <h2 id="askTitle">…</h2>
+        <p id="askBody">…</p>
+        <label class="trust"><input type="checkbox" id="trustBox" /> <span>Bu qurilmadan doim so'ramasdan ochish</span></label>
+        <div class="sheet-actions">
+          <button class="pill ghost" id="rejectBtn" type="button">Rad etish</button>
+          <button class="pill primary" id="acceptBtn" type="button">Ko'rish</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" hidden><span id="toastText"></span></div>
+  </main>
+
+  <script src="rtc.js"></script>
+  <script src="renderer.js"></script>
+</body>
+</html>

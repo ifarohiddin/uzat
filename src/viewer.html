@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; media-src 'self' blob: mediastream:" />
+  <title>Uzat</title>
+  <link rel="stylesheet" href="viewer.css" />
+</head>
+<body>
+  <div class="drag"></div>
+  <video id="video" autoplay playsinline></video>
+
+  <div class="state" id="state">
+    <div class="spinner" id="spinner"></div>
+    <div class="state-title" id="stateTitle">Ulanmoqda…</div>
+    <div class="state-sub" id="stateSub"></div>
+  </div>
+
+  <header class="hud top" id="hudTop">
+    <span class="who"><i class="dot"></i><b id="who">…</b> ekrani</span>
+  </header>
+
+  <nav class="hud bar" id="hudBar">
+    <span class="stat" id="stat">—</span>
+    <button type="button" id="fsBtn" title="To'liq ekran (F11, ikki marta bosish)">
+      <svg viewBox="0 0 24 24" width="18" height="18"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" /></svg>
+    </button>
+    <button type="button" id="closeBtn" class="close" title="Yopish">
+      <svg viewBox="0 0 24 24" width="18" height="18"><path d="M6 6l12 12M18 6L6 18" /></svg>
+    </button>
+  </nav>
+
+  <script src="rtc.js"></script>
+  <script src="viewer.js"></script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+node_modules/
+dist/
+*.log
+# compiled from native/input.cs by `npm run build:native`
+native/*.exe
