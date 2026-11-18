@@ -10,7 +10,7 @@ Birinchi ochishda Windows Firewall ruxsat so'raydi. **Private** va **Public** ta
 
 ## O'rnatish
 
-`dist/` papkasida ikki xil fayl bor:
+Tayyor `.exe` fayllarni [**Releases**](https://github.com/ifarohiddin/uzat/releases/latest) bo'limidan yuklab oling (o'zingiz yig'sangiz, ular `dist/` papkasida paydo bo'ladi). Ikki xil fayl bor:
 
 - `Uzat-Setup-1.0.0.exe` — o'rnatgich. U ish stoliga va Start menyusiga yorliq qo'yadi hamda Firewall ruxsatini o'zi qo'shadi.
 - `Uzat-1.0.0-portable.exe` — o'rnatmasdan ishlaydigan versiya. Bunda Firewall ruxsatini birinchi ishga tushirishda qo'lda berish kerak.
